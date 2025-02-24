@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import AButton from '@/components/atoms/a-button/index.vue'
+import AButton from '@/components/atoms/a-button/a-button.vue'
 </script>
 
 <style>
