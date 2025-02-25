@@ -1,0 +1,28 @@
+.m-note {
+  position: relative;
+  background-color: var(--color-green-light);
+  border-radius: 12px;
+  box-shadow: 0 15px 15px -10px #00000066;
+
+  &__triangle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-dark);
+  }
+
+  &__head {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--color-green-middle);
+  }
+
+  &__text {
+    padding: 20px 28px;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px;
+  }
+}

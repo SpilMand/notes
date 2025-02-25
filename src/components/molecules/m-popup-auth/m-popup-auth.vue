@@ -11,6 +11,7 @@
       </div>
       <aButton class="m-popup-auth__button" label="Войти" @click="authorize()" />
     </div>
+    <div v-show="errorMessage" class="m-popup__error text-small red">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -20,6 +21,7 @@ import aButton from '@/components/atoms/a-button/a-button.vue';
 import { usePopupStore } from '@/stores/popup';
 import { auth } from '@/api/api';
 import { useAuthStore } from '@/stores/auth';
+import { ref } from 'vue';
 
 const store = usePopupStore();
 const authStore = useAuthStore();
@@ -28,6 +30,8 @@ const data = {
   email: '',
   password: '',
 }
+
+const errorMessage = ref();
 
 const enterEmail = (value) => {
   data.email = value;
@@ -38,10 +42,17 @@ const enterPassword = (value) => {
 
 const authorize = async () => {
   const response = await auth(data);
-  localStorage.setItem('accessToken', response.data.accessToken);
-  authStore.refreshToken(response.data.accessToken);
-  store.isOpened = false;
-
+  if (response.type == 'error') {
+    // if (typeof(response.message) == String) {
+      errorMessage.value = response.message;
+    // } else {
+    //   errorMessage.value = response.message[0];
+    // }
+  } else {
+    localStorage.setItem('accessToken', response.data.data.accessToken);
+    authStore.refreshToken(response.data.data.accessToken);
+    store.isOpened = false;
+  }
 }
 </script>
 

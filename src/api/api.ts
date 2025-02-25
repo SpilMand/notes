@@ -18,9 +18,9 @@ export async function auth(params) {
     const response = await axios.post(`${apiUrl}auth`, {
       ...params
     });
-    return response;
+    return { type: 'good', data: response };
   } catch(error) {
-    console.log(error);
+    return { type: 'error', message: error.response.data.message };
   }
 }
 
@@ -33,6 +33,19 @@ export async function exit(token) {
     });
     console.log(response);
     
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function getNotes(token) {
+  try {
+    const response = await axios.get(`${apiUrl}notes`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response;
   } catch(error) {
     console.log(error);
   }

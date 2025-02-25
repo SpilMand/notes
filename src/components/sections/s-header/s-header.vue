@@ -35,13 +35,14 @@ import { exit } from '@/api/api';
 const popupStore = usePopupStore();
 const authStore = useAuthStore();
 
+const exitOpened = ref(false);
+
 const clickExit = async () => {
   await exit(localStorage.getItem('accessToken'));
   localStorage.removeItem('accessToken');
   authStore.refreshToken('');
+  exitOpened.value = false;
 }
-
-const exitOpened = ref(false);
 
 </script>
 
