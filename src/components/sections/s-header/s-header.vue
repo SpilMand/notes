@@ -13,7 +13,7 @@
       <aButton v-else icon="src/assets/images/login.svg" label="Вход" @click="popupStore.closeOpen()"/>
     </div>
     <sPopup
-      v-show="popupStore.isOpened"
+      v-show="popupStore.isOpened && !authStore.accessToken"
       :title="popupStore.isRegister ? 'Регистрация' : 'Вход в ваш аккаунт'"
     >
       <mPopupReg v-if="popupStore.isRegister"/>

@@ -2,7 +2,16 @@
   <div class="a-input">
     <label class="a-input__label text-small gray">{{ label }}</label>
     <div class="a-input__case">
+      <textarea
+        v-if="isArea"
+        class="a-input__input"
+        rows="6"
+        :placeholder="placeholder"
+        :maxlength="maxCount"
+        @input="enterText($event.target.value)"
+      />
       <input
+        v-else
         :type="(isPassword && isHidden) ? 'password' : 'text'"
         class="a-input__input"
         :placeholder="placeholder"
@@ -36,6 +45,7 @@ const props = defineProps({
   placeholder: { type: String, default: 'Введите значение' },
   maxCount: { type: Number, default: 100 },
   isPassword: { type: Boolean, default: false },
+  isArea: { type: Boolean, default: false },
 })
 
 const count = ref(0);

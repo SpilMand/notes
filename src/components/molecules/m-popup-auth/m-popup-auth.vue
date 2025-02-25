@@ -43,11 +43,11 @@ const enterPassword = (value) => {
 const authorize = async () => {
   const response = await auth(data);
   if (response.type == 'error') {
-    // if (typeof(response.message) == String) {
-      errorMessage.value = response.message;
-    // } else {
-    //   errorMessage.value = response.message[0];
-    // }
+    if (typeof(response.response.data.message) == 'string') {
+      errorMessage.value = response.response.data.message;
+    } else {
+      errorMessage.value = response.response.data.message[0];
+    }
   } else {
     localStorage.setItem('accessToken', response.data.data.accessToken);
     authStore.refreshToken(response.data.data.accessToken);

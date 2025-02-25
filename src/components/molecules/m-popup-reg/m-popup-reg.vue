@@ -46,10 +46,10 @@ const enterPasswordAgain = (value) => {
 const registration = async () => {
   const response = await reg(data);
   if (response.type == 'error') {
-    if (typeof(response.message) == String) {
-      errorMessage.value = response.message;
+    if (typeof(response.response.data.message) == 'string') {
+      errorMessage.value = response.response.data.message;
     } else {
-      errorMessage.value = response.message[0];
+      errorMessage.value = response.response.data.message[0];
     }
   } else {
     await auth(data);

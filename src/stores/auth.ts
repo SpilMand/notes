@@ -6,7 +6,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isAuthorized = computed(() => {
     return !!accessToken;
   })
-  const refreshToken = (value) => {
+  const refreshToken = (value: string) => {
     accessToken.value = value;
   }
 

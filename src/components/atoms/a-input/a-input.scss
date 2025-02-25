@@ -18,6 +18,8 @@
     border-radius: 36px;
     width: 100%;
     box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-x: hidden;
     transition: all 0.3s;
 
     &:hover {
