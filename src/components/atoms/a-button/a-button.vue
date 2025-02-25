@@ -1,6 +1,6 @@
 <template>
-  <button class="a-button">
-    <img :src="icon" class="a-button__icon">
+  <button class="a-button" :class="label ? '' : 'circle'">
+    <img v-if="icon" :src="icon" class="a-button__icon">
     <span class="a-button__label">{{ label }}</span>
   </button>
 </template>

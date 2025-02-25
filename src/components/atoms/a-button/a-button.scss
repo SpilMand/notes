@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  justify-content: center;
 
   &:hover {
     background-color: var(--color-green-middle);
@@ -21,5 +22,11 @@
   &.disabled {
     background-color: var(--color-gray);
     cursor: default;
+  }
+
+  &.circle {
+    padding: 20px;
+    border-radius: 50%;
+    gap: 0;
   }
 }

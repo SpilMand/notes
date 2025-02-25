@@ -35,3 +35,24 @@ h4 {
   font-size: 18px;
   line-height: 28px;
 }
+
+.gray {
+  color: var(--color-gray);
+}
+
+.red {
+  color: var(--color-red);
+}
+
+a {
+  all: unset;
+  cursor: pointer;
+  color: var(--color-green-light);
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s;
+
+  &:hover {
+    color: var(--color-white);
+  }
+}
