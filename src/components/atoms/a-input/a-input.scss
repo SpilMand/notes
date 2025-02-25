@@ -1,4 +1,5 @@
 .a-input {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -15,11 +16,26 @@
     background-color: var(--color-white);
     color: var(--color-dark);
     border-radius: 36px;
+    width: 100%;
+    box-sizing: border-box;
     transition: all 0.3s;
 
     &:hover {
-      box-sizing: border-box;
       border: 2px solid var(--color-green-light);
+    }
+  }
+
+  &__onoff {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+
+    img {
+      padding: 28px;
+      cursor: pointer;
     }
   }
 

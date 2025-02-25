@@ -14,9 +14,11 @@
     background-color: var(--color-dark-middle);
     border-radius: 40px;
     padding: 16px;
+    width: 100%;
 
     @media (min-width: 768px) {
       padding: 56px;
+      width: fit-content;
     }
     @media (min-width: 1366px) {
       padding: 80px;

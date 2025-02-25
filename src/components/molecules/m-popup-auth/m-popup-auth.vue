@@ -2,12 +2,12 @@
   <div class="m-popup-auth">
     <div class="m-popup-auth__inputs">
       <aInput label="Email" />
-      <aInput label="Пароль" placeholder="Введите пароль" />
+      <aInput label="Пароль" placeholder="Введите пароль" :isPassword="true" />
     </div>
     <div class="m-popup-auth__actions">
       <div class="m-popup-auth__text">
         <span class="text-small gray">У Вас нет аккаунта?</span>
-        <a href="">Зарегистрируйтесь</a>
+        <a @click="store.changeType()">Зарегистрируйтесь</a>
       </div>
       <aButton class="m-popup-auth__button" label="Войти" />
     </div>
@@ -17,6 +17,11 @@
 <script setup>
 import aInput from '@/components/atoms/a-input/a-input.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
+import { usePopupStore } from '@/stores/popup';
+
+// import api from '@/api/api';
+
+const store = usePopupStore();
 </script>
 
 <style>
