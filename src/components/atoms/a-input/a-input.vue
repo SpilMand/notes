@@ -7,7 +7,7 @@
         class="a-input__input"
         :placeholder="placeholder"
         :maxlength="maxCount"
-        @input="checkCount($event.target.value)"
+        @input="enterText($event.target.value)"
       >
       <div v-if="isPassword" class="a-input__onoff">
         <img v-if="isHidden" src="@/assets/images/on-password.svg" @click="hideShow">
@@ -27,6 +27,10 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 
+const emit = defineEmits([
+  'enterData'
+])
+
 const props = defineProps({
   label: { type: String, default: 'Введите значение' },
   placeholder: { type: String, default: 'Введите значение' },
@@ -36,6 +40,11 @@ const props = defineProps({
 
 const count = ref(0);
 const isHidden = ref(false);
+
+const enterText = (value) => {
+  checkCount(value);
+  emit('enterData', value)
+}
 
 const checkCount = (value) => {
   count.value = value.length;

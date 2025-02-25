@@ -10,4 +10,31 @@
     align-items: center;
     height: 100%;
   }
+
+  &__user-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__user {
+    cursor: pointer;
+  }
+
+  &__exit {
+    position: absolute;
+    right: 0;
+    top: 75px;
+    padding: 40px;
+    background-color: var(--color-dark-middle);
+    border-radius: 12px;
+    box-shadow: 0 15px 46px -10px #00000099;
+
+    img {
+      position: absolute;
+      right: 20px;
+      top: -9px;
+    }
+  }
 }

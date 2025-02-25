@@ -2,7 +2,15 @@
   <header class="s-header">
     <div class="container">
       <img src="@/assets/images/logo.svg" alt="">
-      <aButton icon="src/assets/images/login.svg" label="Вход" @click="popupStore.closeOpen()"/>
+      <div v-if="authStore.accessToken" class="s-header__user-info">
+        <span class="s-header__email text-small">e-mail@mail.mail</span>
+        <img src="@/assets/images/user.svg" class="s-header__user" @click="exitOpened = !exitOpened">
+        <div v-show="exitOpened" class="s-header__exit">
+          <img src="@/assets/images/vector.svg">
+          <a @click="clickExit">Выйти</a>
+        </div>
+      </div>
+      <aButton v-else icon="src/assets/images/login.svg" label="Вход" @click="popupStore.closeOpen()"/>
     </div>
     <sPopup
       v-show="popupStore.isOpened"
@@ -19,10 +27,22 @@ import aButton from '@/components/atoms/a-button/a-button.vue';
 import sPopup from '@/components/sections/s-popup/s-popup.vue';
 import mPopupAuth from '@/components/molecules/m-popup-auth/m-popup-auth.vue';
 import mPopupReg from '@/components/molecules/m-popup-reg/m-popup-reg.vue';
-import { ref } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { usePopupStore } from '@/stores/popup';
+import { useAuthStore } from '@/stores/auth';
+import { exit } from '@/api/api';
 
 const popupStore = usePopupStore();
+const authStore = useAuthStore();
+
+const clickExit = async () => {
+  await exit(localStorage.getItem('accessToken'));
+  localStorage.removeItem('accessToken');
+  authStore.refreshToken('');
+}
+
+const exitOpened = ref(false);
+
 </script>
 
 <style>
