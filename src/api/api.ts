@@ -24,6 +24,19 @@ export async function auth(params: object) {
   }
 }
 
+export async function getUser(token: string) {
+  try {
+    const response = await axios.get(`${apiUrl}auth`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    return response;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
 export async function exit(token: string) {
   try {
     const response = await axios.delete(`${apiUrl}auth`, {
@@ -62,6 +75,18 @@ export async function createNote(params: object, token: string) {
       }
     });
     return response;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export async function deleteNote(id: number, token: string) {
+  try {
+    const response = await axios.delete(`${apiUrl}notes/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    });
   } catch(error) {
     console.log(error);
   }

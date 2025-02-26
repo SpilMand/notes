@@ -19,7 +19,7 @@
 import aInput from '@/components/atoms/a-input/a-input.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
 import { usePopupStore } from '@/stores/popup';
-import { auth } from '@/api/api';
+import { auth, getUser } from '@/api/api';
 import { useAuthStore } from '@/stores/auth';
 import { ref } from 'vue';
 
@@ -53,6 +53,10 @@ const authorize = async () => {
     authStore.refreshToken(response.data.data.accessToken);
     store.isOpened = false;
   }
+  const userData = await getUser(authStore.accessToken);
+  authStore.setEmail(userData.data.email);
+  localStorage.setItem('Email', userData.data.email);
+  
 }
 </script>
 

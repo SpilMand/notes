@@ -1,7 +1,12 @@
 <template>
   <section class="s-notes">
     <div v-if="notes" class="s-notes__content">
-      <mNote v-for="(note, index) in notes.data" :key="index" :data="note" />
+      <mNote
+        v-for="(note, index) in notes.data"
+        :key="index"
+        :data="note"
+        @refreshNotes="refreshNotes"
+      />
     </div>
     <aButton class="s-notes__add" icon="src/assets/images/add.svg" @click="popupStore.closeOpen()" />
     <sPopup

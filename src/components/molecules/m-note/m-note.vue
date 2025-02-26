@@ -6,17 +6,25 @@
     </div>
     <p class="m-note__text">{{ data.content }}</p>
     <div class="m-note__actions">
-      <aButton label="Удалить" icon="src/assets/images/close.svg" />
+      <aButton label="Удалить" icon="src/assets/images/close.svg" @click="clickDelete" />
     </div>
   </div>
 </template>
 
 <script setup>
 import aButton from '@/components/atoms/a-button/a-button.vue';
+import { deleteNote } from '@/api/api';
 
-defineProps({
+const emit = defineEmits(['refreshNotes']);
+
+const props = defineProps({
   data: { type: Object, default: () => ({}) }
 })
+
+const clickDelete = async () => {
+  await deleteNote(props.data.id, localStorage.getItem('accessToken'));
+  emit('refreshNotes');
+}
 </script>
 
 <style>

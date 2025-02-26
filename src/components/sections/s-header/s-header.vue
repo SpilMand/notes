@@ -3,7 +3,7 @@
     <div class="container">
       <img src="@/assets/images/logo.svg" alt="">
       <div v-if="authStore.accessToken" class="s-header__user-info">
-        <span class="s-header__email text-small">e-mail@mail.mail</span>
+        <span class="s-header__email text-small">{{ email }}</span>
         <img src="@/assets/images/user.svg" class="s-header__user" @click="exitOpened = !exitOpened">
         <div v-show="exitOpened" class="s-header__exit">
           <img src="@/assets/images/vector.svg">
@@ -36,6 +36,10 @@ const popupStore = usePopupStore();
 const authStore = useAuthStore();
 
 const exitOpened = ref(false);
+
+const email = computed(() => {
+  return authStore.email;
+})
 
 const clickExit = async () => {
   await exit(localStorage.getItem('accessToken'));
