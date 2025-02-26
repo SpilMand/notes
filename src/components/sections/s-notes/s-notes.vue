@@ -19,7 +19,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import mNote from '@/components/molecules/m-note/m-note.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
@@ -36,7 +36,6 @@ const notes = ref();
 
 const refreshNotes = async() => {
   notes.value = await getNotes(authStore.accessToken);
-  console.log(notes.value);
 }
 
 onMounted(() => {

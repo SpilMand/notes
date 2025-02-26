@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import aInput from '@/components/atoms/a-input/a-input.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
@@ -47,13 +47,13 @@ const data = {
 
 const errorMessage = ref();
 
-const enterEmail = (value) => {
+const enterEmail = (value: string) => {
   data.email = value;
 }
-const enterPassword = (value) => {
+const enterPassword = (value: string) => {
   data.password = value;
 }
-const enterPasswordAgain = (value) => {
+const enterPasswordAgain = (value: string) => {
   data.confirm_password = value;
 }
 
@@ -71,8 +71,8 @@ const registration = async () => {
     authStore.refreshToken(authData.data.data.accessToken);
     store.isOpened = false;
     const userData = await getUser(authStore.accessToken);
-    authStore.setEmail(userData.data.email);
-    localStorage.setItem('Email', userData.data.email);
+    authStore.setEmail(userData ? userData.data.email : '');
+    localStorage.setItem('Email', userData ? userData.data.email : '');
   }
 }
 </script>

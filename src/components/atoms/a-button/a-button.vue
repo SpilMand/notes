@@ -5,7 +5,7 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
 defineProps({
   icon: { type: String, default: '' },
   label: { type: String, default: '' },

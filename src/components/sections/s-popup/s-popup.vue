@@ -9,7 +9,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import aButton from '@/components/atoms/a-button/a-button.vue';
 import { ref } from 'vue';
 import { usePopupStore } from '@/stores/popup';

@@ -22,7 +22,7 @@
   </header>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import aButton from '@/components/atoms/a-button/a-button.vue';
 import sPopup from '@/components/sections/s-popup/s-popup.vue';
 import mPopupAuth from '@/components/molecules/m-popup-auth/m-popup-auth.vue';
@@ -48,6 +48,7 @@ const email = computed(() => {
 const clickExit = async () => {
   await exit(localStorage.getItem('accessToken'));
   localStorage.removeItem('accessToken');
+  localStorage.removeItem('Email');
   authStore.refreshToken('');
   exitOpened.value = false;
 }

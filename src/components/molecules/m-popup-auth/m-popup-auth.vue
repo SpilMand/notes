@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import aInput from '@/components/atoms/a-input/a-input.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
 import { usePopupStore } from '@/stores/popup';
@@ -39,10 +39,10 @@ const data = {
 
 const errorMessage = ref();
 
-const enterEmail = (value) => {
+const enterEmail = (value: string) => {
   data.email = value;
 }
-const enterPassword = (value) => {
+const enterPassword = (value: string) => {
   data.password = value;
 }
 
@@ -59,8 +59,8 @@ const authorize = async () => {
     authStore.refreshToken(response.data.data.accessToken);
     store.isOpened = false;
     const userData = await getUser(authStore.accessToken);
-    authStore.setEmail(userData.data.email);
-    localStorage.setItem('Email', userData.data.email);
+    authStore.setEmail(userData ? userData.data.email : '');
+    localStorage.setItem('Email', userData ? userData.data.email : '');
   }
   
 }

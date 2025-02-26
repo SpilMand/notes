@@ -4,19 +4,21 @@
     <div class="a-input__case">
       <textarea
         v-if="isArea"
+        v-model="curText"
         class="a-input__input"
         rows="6"
         :placeholder="placeholder"
         :maxlength="maxCount"
-        @input="enterText($event.target.value)"
+        @input="enterText(curText)"
       />
       <input
         v-else
+        v-model="curText"
         :type="(isPassword && isHidden) ? 'password' : 'text'"
         class="a-input__input"
         :placeholder="placeholder"
         :maxlength="maxCount"
-        @input="enterText($event.target.value)"
+        @input="enterText(curText)"
       >
       <div v-if="isPassword" class="a-input__onoff">
         <img v-if="isHidden" src="@/assets/images/on-password.svg" @click="hideShow">
@@ -33,7 +35,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
 const emit = defineEmits([
@@ -51,12 +53,14 @@ const props = defineProps({
 const count = ref(0);
 const isHidden = ref(false);
 
-const enterText = (value) => {
+const curText = ref('');
+
+const enterText = (value: string) => {
   checkCount(value);
   emit('enterData', value)
 }
 
-const checkCount = (value) => {
+const checkCount = (value: string) => {
   count.value = value.length;
 }
 

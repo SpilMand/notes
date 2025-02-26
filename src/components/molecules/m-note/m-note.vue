@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import aButton from '@/components/atoms/a-button/a-button.vue';
 import { deleteNote } from '@/api/api';
 

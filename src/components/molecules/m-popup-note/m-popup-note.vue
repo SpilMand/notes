@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue';
 import aInput from '@/components/atoms/a-input/a-input.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
@@ -24,10 +24,10 @@ const data = ({
   content: '',
 })
 
-const enterTitle = (value) => {
+const enterTitle = (value: string) => {
   data.title = value;
 }
-const enterContent = (value) => {
+const enterContent = (value: string) => {
   data.content = value;
 }
 

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import SHeader from './components/sections/s-header/s-header.vue'
+import sHeader from './components/sections/s-header/s-header.vue' 
 </script>
 
 <template>
     <div class="container">
-  <SHeader />
+  <sHeader />
   <!-- <RouterLink to="/">Home</RouterLink> -->
 
     <RouterView />
