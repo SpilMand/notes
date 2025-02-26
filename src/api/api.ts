@@ -9,7 +9,7 @@ export async function reg(params: object) {
     });
     return { type: 'good', data: response }
   } catch(error) {
-    return { type: 'error', message: error };
+    return { type: 'error', data: error };
   }
 }
 
@@ -20,7 +20,7 @@ export async function auth(params: object) {
     });
     return { type: 'good', data: response };
   } catch(error) {
-    return { type: 'error', message: error };
+    return { type: 'error', data: error };
   }
 }
 

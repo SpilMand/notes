@@ -38,7 +38,11 @@ const authStore = useAuthStore();
 const exitOpened = ref(false);
 
 const email = computed(() => {
-  return authStore.email;
+  if (localStorage.getItem('Email')) {
+    return localStorage.getItem('Email');
+  } else {
+    return authStore.email;
+  }
 })
 
 const clickExit = async () => {

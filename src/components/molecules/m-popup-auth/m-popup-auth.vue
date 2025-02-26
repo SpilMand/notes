@@ -2,7 +2,13 @@
   <div class="m-popup-auth">
     <div class="m-popup-auth__inputs">
       <aInput label="Email" @enterData="enterEmail" />
-      <aInput label="Пароль" placeholder="Введите пароль" :isPassword="true" @enterData="enterPassword" />
+      <aInput
+        label="Пароль"
+        placeholder="Введите пароль"
+        :isPassword="true"
+        @enterData="enterPassword"
+        :maxCount="12"
+      />
     </div>
     <div class="m-popup-auth__actions">
       <div class="m-popup-auth__text">
@@ -43,19 +49,19 @@ const enterPassword = (value) => {
 const authorize = async () => {
   const response = await auth(data);
   if (response.type == 'error') {
-    if (typeof(response.response.data.message) == 'string') {
-      errorMessage.value = response.response.data.message;
+    if (typeof(response.data.response.data.message) == 'string') {
+      errorMessage.value = response.data.response.data.message;
     } else {
-      errorMessage.value = response.response.data.message[0];
+      errorMessage.value = response.data.response.data.message[0];
     }
   } else {
     localStorage.setItem('accessToken', response.data.data.accessToken);
     authStore.refreshToken(response.data.data.accessToken);
     store.isOpened = false;
+    const userData = await getUser(authStore.accessToken);
+    authStore.setEmail(userData.data.email);
+    localStorage.setItem('Email', userData.data.email);
   }
-  const userData = await getUser(authStore.accessToken);
-  authStore.setEmail(userData.data.email);
-  localStorage.setItem('Email', userData.data.email);
   
 }
 </script>

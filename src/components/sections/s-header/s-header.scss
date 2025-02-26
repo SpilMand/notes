@@ -19,6 +19,14 @@
     gap: 12px;
   }
 
+  &__email {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: inline;
+    }
+  }
+
   &__user {
     cursor: pointer;
   }

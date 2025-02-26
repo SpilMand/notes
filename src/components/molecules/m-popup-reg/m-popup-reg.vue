@@ -2,8 +2,20 @@
   <div class="m-popup-reg">
     <div class="m-popup-reg__inputs">
       <aInput label="Email" @enterData="enterEmail" />
-      <aInput label="Пароль" placeholder="Введите пароль" :isPassword="true" @enterData="enterPassword" />
-      <aInput label="Пароль ещё раз" placeholder="Введите пароль" :isPassword="true" @enterData="enterPasswordAgain" />
+      <aInput
+        label="Пароль"
+        placeholder="Введите пароль"
+        :isPassword="true"
+        @enterData="enterPassword"
+        :maxCount="12"
+      />
+      <aInput
+        label="Пароль ещё раз"
+        placeholder="Введите пароль"
+        :isPassword="true"
+        @enterData="enterPasswordAgain"
+        :maxCount="12"
+      />
     </div>
     <div class="m-popup-reg__actions">
       <div class="m-popup-reg__text">
@@ -21,9 +33,11 @@ import { ref } from 'vue';
 import aInput from '@/components/atoms/a-input/a-input.vue';
 import aButton from '@/components/atoms/a-button/a-button.vue';
 import { usePopupStore } from '@/stores/popup';
-import { reg, auth } from '@/api/api';
+import { useAuthStore } from '@/stores/auth';
+import { reg, auth, getUser } from '@/api/api';
 
 const store = usePopupStore();
+const authStore = useAuthStore();
 
 const data = {
   email: '',
@@ -46,13 +60,19 @@ const enterPasswordAgain = (value) => {
 const registration = async () => {
   const response = await reg(data);
   if (response.type == 'error') {
-    if (typeof(response.response.data.message) == 'string') {
-      errorMessage.value = response.response.data.message;
+    if (typeof(response.data.response.data.message) == 'string') {
+      errorMessage.value = response.data.response.data.message;
     } else {
-      errorMessage.value = response.response.data.message[0];
+      errorMessage.value = response.data.response.data.message[0];
     }
   } else {
-    await auth(data);
+    const authData = await auth(data);
+    localStorage.setItem('accessToken', authData.data.data.accessToken);
+    authStore.refreshToken(authData.data.data.accessToken);
+    store.isOpened = false;
+    const userData = await getUser(authStore.accessToken);
+    authStore.setEmail(userData.data.email);
+    localStorage.setItem('Email', userData.data.email);
   }
 }
 </script>
